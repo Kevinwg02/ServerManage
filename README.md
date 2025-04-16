@@ -2,7 +2,7 @@
 
 Il faut ce souvenir pour docker qu'il isole le container. C'est le but! Il faut donc dans la commande ajouter le dossier que l'on veux lier. 
 <br>
-<img src="plexlogo"/>
+<img src="plexlogo.jpg"/>
 <br>
 Attention pour plex il y a 2 points: 
 
