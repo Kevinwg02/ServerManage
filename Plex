@@ -1,0 +1,13 @@
+docker run -d   
+--name=plex   -e
+PUID=1000   -e
+PGID=1000   -e
+VERSION=docker   -e
+ADVERTISE_IP=http://192.168.1.250:32400/   -v
+/home/admink/plex/config:/config   -v
+/hdd/Films:/data/films   -v
+/hdd/Series:/data/series   -p
+32400:32400   --network=host -e
+PLEX_CLAIM="claim-35434354"  
+--restart unless-stopped
+linuxserver/plex
