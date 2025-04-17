@@ -1,0 +1,58 @@
+#!/bin/bash
+
+set -e
+
+echo "📦 Mise à jour du système..."
+sudo apt update && sudo apt upgrade -y
+
+echo "🐳 Installation de Docker..."
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common gnupg lsb-release
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+echo "✅ Docker installé avec succès"
+
+echo "👤 Ajout de l'utilisateur actuel au groupe docker (déconnexion nécessaire pour appliquer)..."
+sudo usermod -aG docker $USER
+
+echo "📁 Création des dossiers nécessaires..."
+mkdir -p /home/admink/plex/config
+mkdir -p /hdd/Films /hdd/Series /hdd/Musique
+mkdir -p /opt/navidrome/data
+
+echo "🚀 Déploiement de Plex..."
+docker run -d \
+  --name=plex \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e VERSION=docker \
+  -e ADVERTISE_IP=http://192.168.1.250:32400/ \
+  -e PLEX_CLAIM="claim-35434354" \
+  -v /home/admink/plex/config:/config \
+  -v /hdd/Films:/data/films \
+  -v /hdd/Series:/data/series \
+  -p 32400:32400 \
+  --network=host \
+  --restart unless-stopped \
+  linuxserver/plex
+
+echo "🎶 Déploiement de Navidrome..."
+docker run -d \
+  --name navidrome \
+  --restart=unless-stopped \
+  --user $(id -u):$(id -g) \
+  -v /hdd/Musique:/music \
+  -v /opt/navidrome/data:/data \
+  -p 4533:4533 \
+  -e ND_LOGLEVEL=info \
+  -e ND_MUSICFOLDER=/music \
+  deluan/navidrome:latest
+
+echo "✅ Installation terminée ! Pense à te déconnecter/reconnecter pour que les droits Docker s’appliquent."
