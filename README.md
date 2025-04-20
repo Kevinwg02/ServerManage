@@ -87,7 +87,7 @@ sudo mkdir -p /etc/filebrowser
 sudo tee /etc/filebrowser/.filebrowser.yaml > /dev/null <<EOF
 port: 8080
 address: 0.0.0.0
-#change the starting location if you don't want to give full access
+
 root: /
 database: /etc/filebrowser/filebrowser.db
 EOF
