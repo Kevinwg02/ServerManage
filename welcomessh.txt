@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Install figlet if not already installed
+echo "Installing figlet..."
+sudo apt update && sudo apt install -y figlet
+
+# Disable noisy/unwanted MOTD scripts
+echo "Disabling default MOTD components..."
+sudo chmod -x /etc/update-motd.d/50-motd-news 2>/dev/null
+sudo chmod -x /etc/update-motd.d/10-help-text 2>/dev/null
+sudo chmod -x /etc/update-motd.d/85-fwupd 2>/dev/null
+sudo chmod -x /etc/update-motd.d/90-updates-available 2>/dev/null
+sudo chmod -x /etc/update-motd.d/91-contract-ua-esm-status 2>/dev/null
+sudo chmod -x /etc/update-motd.d/91-release-upgrade 2>/dev/null
+sudo chmod -x /etc/update-motd.d/92-unattended-upgrades 2>/dev/null
+sudo chmod -x /etc/update-motd.d/95-hwe-eol 2>/dev/null
+sudo chmod -x /etc/update-motd.d/97-overlayroot 2>/dev/null
+sudo chmod -x /etc/update-motd.d/98-fsck-at-reboot 2>/dev/null
+sudo chmod -x /etc/update-motd.d/98-reboot-required 2>/dev/null
+
+# Enable useful system info scripts
+echo "Ensuring useful info scripts are enabled..."
+sudo chmod +x /etc/update-motd.d/00-header
+sudo chmod +x /etc/update-motd.d/50-landscape-sysinfo
+
+# Create custom MOTD script
+echo "Creating custom welcome banner..."
+sudo tee /etc/update-motd.d/99-custom > /dev/null << 'EOF'
+#!/bin/bash
+echo -e "\e[1;32m"
+figlet -w 100 "Welcome to Server-M"
+echo -e "\e[0m"
+EOF
+
+# Make custom script executable
+sudo chmod +x /etc/update-motd.d/99-custom
+
+# Run test
+echo "Running MOTD test output..."
+run-parts /etc/update-motd.d/

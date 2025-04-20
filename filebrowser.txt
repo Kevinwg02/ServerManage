@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# ---- Install FileBrowser ----
+echo "[1/6] Installing FileBrowser..."
+curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+
+# ---- Create config directory and config file ----
+echo "[2/6] Creating config directory and YAML config..."
+sudo mkdir -p /etc/filebrowser
+
+sudo tee /etc/filebrowser/.filebrowser.yaml > /dev/null <<EOF
+port: 8080
+address: 0.0.0.0
+root: /
+database: /etc/filebrowser/filebrowser.db
+EOF
+
+# ---- Create systemd service ----
+echo "[3/6] Creating systemd service..."
+sudo tee /etc/systemd/system/filebrowser.service > /dev/null <<EOF
+[Unit]
+Description=File Browser Service
+After=network.target
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=5s
+ExecStart=/usr/local/bin/filebrowser -c /etc/filebrowser/.filebrowser.yaml
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# ---- Reload systemd ----
+echo "[4/6] Reloading systemd..."
+sudo systemctl daemon-reload
+
+# ---- Start and enable the service ----
+echo "[5/6] Starting FileBrowser service..."
+sudo systemctl start filebrowser.service
+sudo systemctl enable filebrowser.service
+
+# ---- Done ----
+echo "[6/6] Installation complete."
+echo "Access FileBrowser at: http://<your-server-ip>:8080"
+echo "Login with username: admin  |  password: admin"
