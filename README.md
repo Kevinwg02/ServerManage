@@ -60,7 +60,7 @@ sudo apt install -y webmin
 ```
 
 ```bash
-## -- Webmin --
+## -- Cockpit --
 
 echo "🔧 Installation de Cockpit..."
 
