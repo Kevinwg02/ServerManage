@@ -123,3 +123,13 @@ echo "[6/6] Installation complete."
 echo "Access FileBrowser at: http://<your-server-ip>:8080"
 echo "Login with username: admin  |  password: admin"
 ```
+
+### Metube
+
+Little docker image with web interface to download from youtube.
+
+```bash
+docker pull alexta69/metube
+dans le dossier !!
+docker compose up -d
+```
