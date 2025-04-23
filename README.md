@@ -126,10 +126,11 @@ echo "Login with username: admin  |  password: admin"
 
 ### Metube
 
-Little docker image with web interface to download from youtube.
+Little docker image with web interface to download from youtube. You need to download the metube-docker-compose.yml, rename it to docker-compose.yml.
+
+The up command is supposed to be lunch from the folder
 
 ```bash
 docker pull alexta69/metube
-dans le dossier !!
 docker compose up -d
 ```
