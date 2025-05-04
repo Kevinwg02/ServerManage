@@ -128,9 +128,17 @@ echo "Login with username: admin  |  password: admin"
 
 Little docker image with web interface to download from youtube. You need to download the metube-docker-compose.yml, rename it to docker-compose.yml.
 
-The up command is supposed to be lunch from the folder
+The up command is supposed to be lunch from the folder. It downloads music, videos and even playlists!
 
 ```bash
 docker pull alexta69/metube
 docker compose up -d
 ```
+
+
+To make an alias permenant you need to add it to the file "bashrc": 
+nano ~/.bashrc
+go down with the other aliases:
+alias count="ls | wc -l"
+
+
