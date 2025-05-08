@@ -2,6 +2,9 @@
 
 Basics to install for a fresh server.
 
+To make an alias permenant you need to add it to the file: nano ~/.bashrc 
+go down with the other aliases: alias count="ls | wc -l"
+To apply the new bashrc do: source ~/.bashrc
 
 ## 📜 Custom MOTD Setup
 
@@ -135,13 +138,6 @@ docker pull alexta69/metube
 docker compose up -d
 ```
 
-
-To make an alias permenant you need to add it to the file "bashrc": 
-nano ~/.bashrc
-go down with the other aliases:
-alias count="ls | wc -l"
-To apply the new bashrc do:
-source ~/.bashrc
 
 
 ### Navidrome
