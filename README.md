@@ -142,3 +142,16 @@ go down with the other aliases:
 alias count="ls | wc -l"
 
 
+### Navidrome
+
+```bash
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    ports:
+      - "4533:4533"
+    restart: unless-stopped
+    volumes:
+      - "/root/music:/music:ro"
+```
+
