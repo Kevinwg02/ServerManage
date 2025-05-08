@@ -140,6 +140,8 @@ To make an alias permenant you need to add it to the file "bashrc":
 nano ~/.bashrc
 go down with the other aliases:
 alias count="ls | wc -l"
+To apply the new bashrc do:
+source ~/.bashrc
 
 
 ### Navidrome
