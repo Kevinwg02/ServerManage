@@ -1,5 +1,7 @@
 # 🛠️ Ubuntu Server Setup Scripts 
 
+![image](https://github.com/user-attachments/assets/7e75b978-8ca8-4b15-8547-3cdf1d21ff29)
+
 Basics to install for a fresh server.
 
 To make an alias permenant you need to add it to the file: nano ~/.bashrc 
