@@ -1,0 +1,5 @@
+#!bin/bash
+echo "🔧 Installation de Cockpit..."
+
+ sudo apt install cockpit
+sudo systemctl enable --now cockpit

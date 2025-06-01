@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  picard:
+    container_name: picard
+    ports:
+      - "5800:5800"
+    volumes:
+      - './config:/config:rw'
+      - "/hdd/musique:/storage:rw"
+    image: mikenye/picard:latest
