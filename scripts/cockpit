@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 echo "🔧 Installation de Cockpit..."
 
  sudo apt install cockpit
