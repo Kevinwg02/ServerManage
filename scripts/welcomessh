@@ -11,9 +11,14 @@ apt install neofetch -y
 # Disable noisy/unwanted MOTD scripts
 echo "Disabling default MOTD components..."
 sudo chmod -x /etc/update-motd.d/10-help-text 2>/dev/null
+sudo chmod -x /etc/update-motd.d/85-fwupd 2>/dev/null
+sudo chmod -x /etc/update-motd.d/90-updates-available 2>/dev/null
 sudo chmod -x /etc/update-motd.d/91-contract-ua-esm-status 2>/dev/null
+sudo chmod -x /etc/update-motd.d/92-unattended-upgrades 2>/dev/null
 sudo chmod -x /etc/update-motd.d/95-hwe-eol 2>/dev/null
 sudo chmod -x /etc/update-motd.d/97-overlayroot 2>/dev/null
+sudo chmod -x /etc/update-motd.d/98-fsck-at-reboot 2>/dev/null
+sudo chmod -x /etc/update-motd.d/98-reboot-required 2>/dev/null
 
 
 # Create custom MOTD script
