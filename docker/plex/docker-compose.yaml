@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  plex:
+    image: linuxserver/plex
+    container_name: plex
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - ADVERTISE_IP=http://ip:32400/
+      - PLEX_CLAIM=claim-1msjS2V8y68fCEL7iTyD
+    volumes:
+      - /home/admink/plex/config:/config
+      - /vault/mediavault/Films:/data/films
+      - /vault/mediavault/FilmsFR:/data/filmsFR
+      - /vault/mediavault:/data/series
+    network_mode: host
+    restart: unless-stopped
