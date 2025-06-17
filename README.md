@@ -1,6 +1,7 @@
 # 🛠️ Ubuntu Server Setup Scripts 
 
-![image](https://github.com/user-attachments/assets/7e75b978-8ca8-4b15-8547-3cdf1d21ff29)
+
+![image](https://github.com/user-attachments/assets/6fdcc24d-88e8-40a8-99b9-3a2b91a06171)
 
 Basics to install for a fresh server.
 
