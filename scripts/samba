@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Install Samba and required tools
+apt update
+apt install samba samba-common-bin -y
+
+# Ensure the shared directory exists
+mkdir -p /mnt/serverm
+chown kevin:kevin /mnt/serverm
+chmod 770 /mnt/serverm
+
+# Add 'kevin' if not present
+if ! id "kevin" &>/dev/null; then
+    adduser --disabled-password --gecos "" kevin
+fi
+
+# Add Samba user (requires manual password entry)
+smbpasswd -a kevin
+
+# Backup original smb.conf
+cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
+
+# Append the share definition to smb.conf if not already present
+grep -q "\[ServerM\]" /etc/samba/smb.conf || cat <<EOL >> /etc/samba/smb.conf
+
+[ServerM]
+        path = /mnt/serverm
+        read only = no
+        writable = yes
+        public = no
+        browseable = yes
+        valid users = kevin
+EOL
+
+# Restart Samba service
+systemctl restart smbd
+
+echo "Samba installed and share configured."
