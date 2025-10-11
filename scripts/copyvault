@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#Montage HDD
+echo montage
+mount -a
+
+#CHECK HDD
+ls /vault/backupdrive/
+
+#COPY
+read -p "On fait la copie des films? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	echo COPY FILMS DOING
+	rsync -ah --progress --ignore-existing /vault/mediavault/Films/ /vault/backupdrive/Films/
+	echo COPY FILMS DONE
+fi
+echo Copy Films Canceled 
+
+#COPY
+read -p "On fait la copie des series? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+        echo COPY TV SHOW DOING
+        rsync -ah --progress --ignore-existing /vault/mediavault/Series/ /vault/backupdrive/Series/
+	echo COPY TV SHOW DONE
+fi
+echo Copy Series Canceled
